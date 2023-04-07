@@ -2,6 +2,7 @@
 
 class Item < ApplicationRecord
   belongs_to :user
+  before_save :set_default_image
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
@@ -16,5 +17,12 @@ class Item < ApplicationRecord
 
   before_validation do
     self.slug ||= "#{title.to_s.parameterize}-#{rand(36**6).to_s(36)}"
+  end
+
+  private
+  def set_default_image
+    if self.image.empty?
+      self.image = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+    end
   end
 end
