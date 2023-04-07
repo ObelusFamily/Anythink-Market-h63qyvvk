@@ -18,6 +18,9 @@ class ItemsController < ApplicationController
 
     render json: {
       items: @items.map { |item|
+        if item.image.blank?
+          item.image = "#{request.base_url}/api/placeholder.png"
+        end
         {
           title: item.title,
           slug: item.slug,
@@ -64,6 +67,9 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find_by!(slug: params[:slug])
+    if @item.image.blank?
+      @item.image = "#{request.base_url}/api/placeholder.png"
+    end
   end
 
   def update
