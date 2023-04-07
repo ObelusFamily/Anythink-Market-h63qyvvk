@@ -17,4 +17,5 @@ class Item < ApplicationRecord
   before_validation do
     self.slug ||= "#{title.to_s.parameterize}-#{rand(36**6).to_s(36)}"
   end
+
 end
