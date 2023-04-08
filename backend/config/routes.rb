@@ -23,6 +23,5 @@ Rails.application.routes.draw do
     resources :tags, only: [:index]
 
     resources :ping, only: [:index]
-    get '/placeholder', to: "images#show"
   end
 end
